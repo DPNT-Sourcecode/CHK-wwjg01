@@ -59,7 +59,6 @@ class Basket():
             prices[offer.bonus] = min(prices[offer.item], self.calc_bulk_price(offer.bonus, free_item_amt))
                
         final_price = 0
-        print(prices)
         for price in prices:
             final_price += prices[price] 
             
