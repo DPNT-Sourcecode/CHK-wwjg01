@@ -89,7 +89,8 @@ class Basket():
         # Calculate prices for each item group
         for item in self.items:
             if item in self.group_offer.items:
-                group_offer_items.append(self.price_table[item])
+                for i in range(self.items[item][0]):
+                    group_offer_items.append(self.price_table[item])
                 continue
             price = self.calc_single_group_price(item)
             prices[item] = price
@@ -110,6 +111,8 @@ class Basket():
         final_price += group_offers_num*self.group_offer.price
         
         #see if any items were left over and add them, assume the offer applied to the most expensive ones
+        print(group_offer_items)
+        print(sorted(group_offer_items)[:len(group_offer_items) - group_offers_num*self.group_offer.amt])
         for item in sorted(group_offer_items)[:len(group_offer_items) - group_offers_num*self.group_offer.amt]:
             final_price += item
         
@@ -140,4 +143,5 @@ class GroupOffer():
         self.items = items
         self.amt = int(amt)
         self.price = int(price)
+
 
