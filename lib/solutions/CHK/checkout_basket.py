@@ -23,17 +23,16 @@ class Basket():
                 self.invalid = True
             else:
                 self.items[item] = [self.items.get(item, [0])[0] + 1, []]
-        
+        for offer in self.gof_offers_list:
+            temp = GofOffer(offer)
+            if temp.item in self.items:
+                self.gof_offers.append(temp)     
         # Then add on bulk offers
         for offer in self.bulk_offers_list:
             temp = BulkOffer(offer)
             if temp.item in self.items:
                 self.items[temp.item][1].append(temp)
             
-        for offer in self.gof_offers_list:
-            temp = GofOffer(offer)
-            if temp.item in self.items:
-                self.gof_offers.append(temp) 
             
     # Calculate price for single item group, accounting for bulk offers
     def calc_bulk_price(self, item, free_amt = 0):
@@ -91,6 +90,7 @@ class GofOffer():
         self.amt = int(split_list[1])
         self.bonus = split_list[2]
         
+
 
 
 
