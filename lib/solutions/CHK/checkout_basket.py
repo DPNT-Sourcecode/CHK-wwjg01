@@ -27,6 +27,18 @@ class Basket():
             self.items[temp.item][1].append(temp)
         for offer in gof_offers:
             self.gof_offers.append(GofOffer(offer)) 
+    def calc_bulk_price(self, item):
+        this_item_total = 0
+        this_item_left = self.items[item][0]
+        # sort our offers by their value, so that we can ensure customer gets best deal
+        offers = sorted(self.items[item][1], key=BulkOffer.value)
+        for offer in offers:
+            if offer.amt > this_item_left:
+                continue
+            this_item_total += (this_item_left//offer.amt)*offer.price
+            this_item_left = this_item_left%offer.amt
+        this_item_total += this_item_left*price_table[item]
+        final_price += this_item_total
     
     def calc_price(self):
         final_price = 0
@@ -43,6 +55,8 @@ class Basket():
             this_item_total += this_item_left*price_table[item]
             final_price += this_item_total
                 
+        for offer in self.gof_offers:
+            
                 
         return final_price
         
@@ -67,5 +81,3 @@ class GofOffer():
         
 bask = Basket("AAABB", ["A.3.130", "A.5.200", "B.2.45"])
 print(bask.calc_price())
-
-
