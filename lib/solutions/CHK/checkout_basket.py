@@ -105,8 +105,13 @@ class Basket():
         for price in prices:
             final_price += prices[price] 
             
-        # calculate thr group offer chunk of the price
-        final_price += len(group_offer_items)//self.group_offer.amt
+        #how much the customer paid for items discounted by the group offer
+        group_offers_num = len(group_offer_items)//self.group_offer.amt
+        final_price += group_offers_num*self.group_offer.price
+        
+        #see if any items were left over and add them, assume the offer applied to the most expensive ones
+        for item in sorted(group_offer_items)[:len(group_offer_items) - group_offers_num*self.group_offer.amt]:
+            final_price += item
         
         return final_price
         
@@ -133,6 +138,6 @@ class GroupOffer():
     def __init__(self, offer):
         items, amt, price = offer.split('.')
         self.items = items
-        self.amt = amt
-        self.price = price
+        self.amt = int(amt)
+        self.price = int(price)
 
