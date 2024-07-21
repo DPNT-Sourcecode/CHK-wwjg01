@@ -37,8 +37,10 @@ class Basket():
         self.invalid = False
         self.items = {}
         self.gof_offers = []
-        self.group_offers = []
-        self.group_items_set = set()
+        
+        # Very bruteforcy, basically enforcing one single group offer rather than allowing adding more,
+        # but due to time constraints of the assignment, do this for now
+        self.group_offer = GroupOffer(self.group_offers_list[0])
         
         # Build our dict of items, first by determining item amounts
         for item in skus:
@@ -57,12 +59,6 @@ class Basket():
             
             if temp.item in self.items:
                 self.gof_offers.append(temp)   
-                
-        for offer in self.group_offers_list:
-            temp = GroupOffer(offer)
-            for char in temp.items:
-                self.group_items_set.add(char)
-            self.group_offers.append(temp)
                   
         # Then add on bulk offers
         for offer in self.bulk_offers_list:
@@ -92,6 +88,9 @@ class Basket():
         
         # Calculate prices for each item group
         for item in self.items:
+            if item in self.group_offer.items:
+                self.group_offer.counter += 1
+                continue
             price = self.calc_single_group_price(item)
             prices[item] = price
             
@@ -133,4 +132,6 @@ class GroupOffer():
         self.items = items
         self.amt = amt
         self.price = price
+        #count real items that are in this set
+        self.counter = 0
 
