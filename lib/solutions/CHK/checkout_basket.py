@@ -38,7 +38,7 @@ class Basket():
         self.items = {}
         self.gof_offers = []
         self.group_offers = []
-        self.group_items = set()
+        self.group_items_set = set()
         
         # Build our dict of items, first by determining item amounts
         for item in skus:
@@ -59,7 +59,10 @@ class Basket():
                 self.gof_offers.append(temp)   
                 
         for offer in self.group_offers_list:
-            self.group_offers.append(GroupOffer(offer))
+            temp = GroupOffer(offer)
+            for char in temp.items:
+                self.group_items_set.add(char)
+            self.group_offers.append(temp)
                   
         # Then add on bulk offers
         for offer in self.bulk_offers_list:
@@ -130,3 +133,4 @@ class GroupOffer():
         self.items = items
         self.amt = amt
         self.price = price
+
