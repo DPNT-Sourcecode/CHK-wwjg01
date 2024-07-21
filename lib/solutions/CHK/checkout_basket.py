@@ -2,7 +2,7 @@
 
 class Basket():
     # Ideally we'd have a simple db or more elegant storage, but for now a dict + 2 lists will do
-    bulk_offers_list = ["A.3.130", "A.5.200", "B.2.45", "H.5.45", "H.10.80", "K.2.150", "P.5.200", "Q.3.80", "V.2.90", "V.3.130"]
+    bulk_offers_list = ["A.3.130", "A.5.200", "B.2.45", "H.5.45", "H.10.80", "K.2.120", "P.5.200", "Q.3.80", "V.2.90", "V.3.130"]
     gof_offers_list = ["E.2.B", "F.2.F", "N.3.M", "R.3.Q", "U.3.U"]
     group_offers_list = ["STXYZ.3.45"]
     price_table = {
