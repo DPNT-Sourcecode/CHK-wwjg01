@@ -1,31 +1,32 @@
 #main basket class - stores basket info and applies offers
 
-price_table = {
+
+class Basket():
+    bulk_offers_list = ["A.3.130", "A.5.200", "B.2.45"]
+    gof_offers_list = ["E.2.B"]
+    price_table = {
     "A": 50,
     "B": 30,
     "C": 20,
     "D": 15,
     "E": 40
 }
-
-class Basket():
-    invalid = False #whether this is an invalid basket
-    items = {} # "item" : [amount, [bulk offers]]
-    gof_offers =[]
-    def __init__(self, skus, bulk_offers=[], gof_offers=[]):
-        
+    def __init__(self, skus):
+        self.invalid = False
+        self.items = {}
+        self.gof_offers = []
         # Build our dict of items, first by determining item amounts
         for item in skus:
-            if not price_table.get(item, False):
+            if not self.price_table.get(item, False):
                 self.invalid = True
             else:
                 self.items[item] = [self.items.get(item, [0])[0] + 1, []]
         
         # Then add on bulk offers
-        for offer in bulk_offers:
+        for offer in self.bulk_offers:
             temp = BulkOffer(offer)
             self.items[temp.item][1].append(temp)
-        for offer in gof_offers:
+        for offer in self.gof_offers:
             self.gof_offers.append(GofOffer(offer)) 
             
     # Calculate price for single item group, accounting for bulk offers
@@ -41,7 +42,7 @@ class Basket():
                 continue
             this_item_total += (this_item_left//offer.amt)*offer.price
             this_item_left = this_item_left%offer.amt
-        this_item_total += this_item_left*price_table[item]
+        this_item_total += this_item_left*self.price_table[item]
         return this_item_total
     
     def calc_price(self):
@@ -83,4 +84,3 @@ class GofOffer():
         self.amt = int(split_list[1])
         self.bonus = split_list[2]
         
-
