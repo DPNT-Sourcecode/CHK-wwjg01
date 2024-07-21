@@ -9,6 +9,8 @@ class TestCheckout():
         assert checkout_solution.checkout("zczxv(#!__E(fdj))") == -1
     def test_U_bogof(self):
         assert checkout_solution.checkout("UUUU") == 120
+    def test_checkout_new_items(self):
+        assert checkout_solution.checkout("QQQVZYYXAAA") == 420
         
-        
+
 
