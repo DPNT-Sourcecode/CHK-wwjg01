@@ -15,6 +15,7 @@ class Basket():
         self.invalid = False
         self.items = {}
         self.gof_offers = []
+        
         # Build our dict of items, first by determining item amounts
         for item in skus:
             if not self.price_table.get(item, False):
@@ -23,10 +24,12 @@ class Basket():
                 self.items[item] = [self.items.get(item, [0])[0] + 1, []]
         
         # Then add on bulk offers
-        for offer in self.bulk_offers:
+        for offer in self.bulk_offers_list:
             temp = BulkOffer(offer)
-            self.items[temp.item][1].append(temp)
-        for offer in self.gof_offers:
+            if temp.item in self.items:
+                self.items[temp.item][1].append(temp)
+            
+        for offer in self.gof_offers_list:
             self.gof_offers.append(GofOffer(offer)) 
             
     # Calculate price for single item group, accounting for bulk offers

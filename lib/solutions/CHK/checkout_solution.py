@@ -16,15 +16,11 @@ Our price table and offers:
 | E    | 40    | 2E get one B free      |
 +------+-------+------------------------+
 '''
-
-
-bulk_offers_list = ["A.3.130", "A.5.200", "B.2.45"]
-gof_offers_list = ["E.2.B"]
         
 
 def checkout(skus):
     # Build our basket from the str first
-    basket = Basket(skus, bulk_offers_list, gof_offers_list)
+    basket = Basket(skus)
     if basket.invalid:
         return -1
     
