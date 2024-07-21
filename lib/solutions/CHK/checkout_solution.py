@@ -25,5 +25,15 @@ price_table = {
     "D": [15]
 }
 def checkout(skus):
-    raise NotImplementedError()
+    final_price = 0
+    basket = {}
+    for item in skus:
+        if not price_table.get(item, False):
+            return -1
+        else:
+            basket[item] = basket.get(item, 0) + 1
+
+            
+        
+
 
