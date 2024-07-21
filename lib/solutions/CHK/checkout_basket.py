@@ -85,11 +85,11 @@ class Basket():
     
     def calc_price(self):
         prices = dict.fromkeys(self.items.keys(), 0)
-        
+        group_offer_items = []
         # Calculate prices for each item group
         for item in self.items:
             if item in self.group_offer.items:
-                self.group_offer.counter += 1
+                group_offer_items.append(self.price_table[item])
                 continue
             price = self.calc_single_group_price(item)
             prices[item] = price
@@ -105,6 +105,9 @@ class Basket():
         for price in prices:
             final_price += prices[price] 
             
+        # calculate thr group offer chunk of the price
+        final_price += len(group_offer_items)//self.group_offer.amt
+        
         return final_price
         
 # example bulk offer format - A.3.130
@@ -132,6 +135,4 @@ class GroupOffer():
         self.items = items
         self.amt = amt
         self.price = price
-        #count real items that are in this set
-        self.counter = 0
 
