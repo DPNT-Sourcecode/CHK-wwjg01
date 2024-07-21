@@ -4,7 +4,7 @@ class Basket():
     # Ideally we'd have a simple db or more elegant storage, but for now a dict + 2 lists will do
     bulk_offers_list = ["A.3.130", "A.5.200", "B.2.45", "H.5.45", "H.10.80", "K.2.150", "P.5.200", "Q.3.80", "V.2.90", "V.3.130"]
     gof_offers_list = ["E.2.B", "F.2.F", "N.3.M", "R.3.Q", "U.3.U"]
-    group_offers = ["STXYZ.3.45"]
+    group_offers_list = ["STXYZ.3.45"]
     price_table = {
     "A": 50,
     "B": 30,
@@ -37,6 +37,8 @@ class Basket():
         self.invalid = False
         self.items = {}
         self.gof_offers = []
+        self.group_offers = []
+        self.group_items = set()
         
         # Build our dict of items, first by determining item amounts
         for item in skus:
@@ -55,6 +57,9 @@ class Basket():
             
             if temp.item in self.items:
                 self.gof_offers.append(temp)   
+                
+        for offer in self.group_offers_list:
+            self.group_offers.append(GroupOffer(offer))
                   
         # Then add on bulk offers
         for offer in self.bulk_offers_list:
@@ -64,7 +69,7 @@ class Basket():
             
             
     # Calculate price for single item group, accounting for bulk offers
-    def calc_bulk_price(self, item, free_amt = 0):
+    def calc_single_group_price(self, item, free_amt = 0):
         this_item_total = 0
         this_item_left = self.items[item][0] - free_amt
         if this_item_left <= 0:
@@ -84,7 +89,7 @@ class Basket():
         
         # Calculate prices for each item group
         for item in self.items:
-            price = self.calc_bulk_price(item)
+            price = self.calc_single_group_price(item)
             prices[item] = price
             
         # Apply 'buy X get one free' type offers        
@@ -92,7 +97,7 @@ class Basket():
             amt = self.items[offer.item][0]
             free_item_amt = amt//offer.amt
             if offer.bonus in self.items:
-                prices[offer.bonus] = min(prices[offer.item], self.calc_bulk_price(offer.bonus, free_item_amt))
+                prices[offer.bonus] = min(prices[offer.item], self.calc_single_group_price(offer.bonus, free_item_amt))
                
         final_price = 0
         for price in prices:
@@ -121,7 +126,7 @@ class GofOffer():
 
 class GroupOffer():
     def __init__(self, offer):
-        items, amt, price = offer.split(offer)
+        items, amt, price = offer.split('.')
         self.items = items
         self.amt = amt
         self.price = price

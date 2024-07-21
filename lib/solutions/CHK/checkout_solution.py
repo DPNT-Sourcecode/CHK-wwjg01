@@ -1,4 +1,4 @@
-from solutions.CHK.checkout_basket import Basket
+from lib.solutions.CHK.checkout_basket import Basket
 
 # noinspection PyUnusedLocal
 # skus = unicode string
