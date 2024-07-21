@@ -27,8 +27,8 @@ price_table = {
 }
 
 
-bulk_offers_list = ["A.3.130", "A.5.200", "B.2.45"]
-gof_offers_list = ["E.2.B"]
+bulk_offers_list = sorted(["A.3.130", "A.5.200", "B.2.45"])
+gof_offers_list = sorted(["E.2.B"])
 
 def checkout(skus):
     final_price = 0
@@ -53,5 +53,6 @@ def checkout(skus):
 
             
         
+
 
 
