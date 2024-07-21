@@ -4,6 +4,7 @@ class Basket():
     # Ideally we'd have a simple db or more elegant storage, but for now a dict + 2 lists will do
     bulk_offers_list = ["A.3.130", "A.5.200", "B.2.45", "H.5.45", "H.10.80", "K.2.150", "P.5.200", "Q.3.80", "V.2.90", "V.3.130"]
     gof_offers_list = ["E.2.B", "F.2.F", "N.3.M", "R.3.Q", "U.3.U"]
+    group_offers = ["STXYZ.3.45"]
     price_table = {
     "A": 50,
     "B": 30,
@@ -102,10 +103,10 @@ class Basket():
 # example bulk offer format - A.3.130
 class BulkOffer():
     def __init__(self, offer):
-        split_list = offer.split('.')
-        self.item = split_list[0]
-        self.amt = int(split_list[1])
-        self.price = int(split_list[2])
+        item, amt, price = offer.split('.')
+        self.item = item
+        self.amt = int(amt)
+        self.price = int(price)
     
     def value(self):
         return self.price / self.amt
@@ -113,8 +114,14 @@ class BulkOffer():
 # type for '... get one free' offers. Examopke fornat - E.2.B
 class GofOffer():
     def __init__(self, offer):
-        split_list = offer.split('.')
-        self.item = split_list[0]
-        self.amt = int(split_list[1])
-        self.bonus = split_list[2]
-        
+        item, amt, bonus = offer.split('.')
+        self.item = item
+        self.amt = int(amt)
+        self.bonus = bonus
+
+class GroupOffer():
+    def __init__(self, offer):
+        items, amt, price = offer.split(offer)
+        self.items = items
+        self.amt = amt
+        self.price = price
