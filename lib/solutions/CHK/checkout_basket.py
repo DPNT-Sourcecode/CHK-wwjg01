@@ -41,22 +41,18 @@ class Basket():
         return this_item_total
     
     def calc_price(self):
-        final_price = 0
-        prices = {
-        "A": -1,
-        "B": -1,
-        "C": -1,
-        "D": -1,
-        "E": -1
-        }
+        prices = dict.fromkeys(self.items.keys(), 0)
+        
         for item in self.items:
             price = self.calc_bulk_price(item)
-            final_price += price
             prices[item] = price
                 
         for offer in self.gof_offers:
             pass
-                
+               
+        final_price = 0
+        for price in prices:
+            final_price += prices[price] 
         return final_price
         
 # example bulk offer format - A.3.130
@@ -80,3 +76,4 @@ class GofOffer():
         
 bask = Basket("AAABB", ["A.3.130", "A.5.200", "B.2.45"])
 print(bask.calc_price())
+
