@@ -62,6 +62,7 @@ class Basket():
         print(prices)
         for price in prices:
             final_price += prices[price] 
+            
         return final_price
         
 # example bulk offer format - A.3.130
@@ -83,6 +84,4 @@ class GofOffer():
         self.amt = int(split_list[1])
         self.bonus = split_list[2]
         
-bask = Basket("AAABBEEDDCAAB", ["A.3.130", "A.5.200", "B.2.45"], ["E.2.B"])
-print(bask.calc_price())
 

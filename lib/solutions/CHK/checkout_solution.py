@@ -16,13 +16,7 @@ Our price table and offers:
 | E    | 40    | 2E get one B free      |
 +------+-------+------------------------+
 '''
-price_table = {
-    "A": 50,
-    "B": 30,
-    "C": 20,
-    "D": 15,
-    "E": 40
-}
+
 
 bulk_offers_list = ["A.3.130", "A.5.200", "B.2.45"]
 gof_offers_list = ["E.2.B"]
@@ -31,11 +25,18 @@ class Basket():
     invalid = False #whether this is an invalid basket
     items = {} # "item" : [amount, [bulk offers]]
     gof_offers =[]
+    price_table = {
+    "A": 50,
+    "B": 30,
+    "C": 20,
+    "D": 15,
+    "E": 40
+}
     def __init__(self, skus, bulk_offers=[], gof_offers=[]):
         
         # Build our dict of items, first by determining item amounts
         for item in skus:
-            if not price_table.get(item, False):
+            if not self.price_table.get(item, False):
                 self.invalid = True
             else:
                 self.items[item] = [self.items.get(item, [0])[0] + 1, []]
@@ -60,7 +61,7 @@ class Basket():
                 continue
             this_item_total += (this_item_left//offer.amt)*offer.price
             this_item_left = this_item_left%offer.amt
-        this_item_total += this_item_left*price_table[item]
+        this_item_total += this_item_left*self.price_table[item]
         return this_item_total
     
     def calc_price(self):
@@ -111,7 +112,3 @@ def checkout(skus):
         return -1
     
     return basket.calc_price()
-
-            
-        
-print(checkout("AAABBEEDDCAAB"))
