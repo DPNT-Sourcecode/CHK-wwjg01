@@ -16,7 +16,7 @@ class Basket():
     "H": 10,
     "I": 35,
     "J": 60,
-    "K": 80,
+    "K": 70,
     "L": 90,
     "M": 15,
     "N": 40,
@@ -24,14 +24,14 @@ class Basket():
     "P": 50,
     "Q": 30,
     "R": 50,
-    "S": 30,
+    "S": 20,
     "T": 20,
     "U": 40,
     "V": 50,
     "W": 20,
-    "X": 90,
-    "Y": 10,
-    "Z": 50
+    "X": 17,
+    "Y": 20,
+    "Z": 21
 }
     def __init__(self, skus):
         self.invalid = False
@@ -143,5 +143,6 @@ class GroupOffer():
         self.items = items
         self.amt = int(amt)
         self.price = int(price)
+
 
 
