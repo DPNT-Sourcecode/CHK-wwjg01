@@ -46,14 +46,16 @@ class Basket():
     def calc_price(self):
         prices = dict.fromkeys(self.items.keys(), 0)
         
+        # Calculate prices for each item group w/ bulk offers in mind
         for item in self.items:
             price = self.calc_bulk_price(item)
             prices[item] = price
-                
+            
+        # Apply 'buy X get one free' type offers        
         for offer in self.gof_offers:
             amt = self.items[offer.item][0]
             free_item_amt = amt//offer.amt
-            prices[offer.item] = min(prices[offer.item], self.calc_bulk_price(offer.item, free_item_amt*len(offer.bonus)))
+            prices[offer.bonus] = min(prices[offer.item], self.calc_bulk_price(offer.bonus, free_item_amt))
                
         final_price = 0
         print(prices)
@@ -80,6 +82,6 @@ class GofOffer():
         self.amt = int(split_list[1])
         self.bonus = split_list[2]
         
-bask = Basket("AAABB", ["A.3.130", "A.5.200", "B.2.45"], ["A.3.B"])
+bask = Basket("AAABBEEDDCAAB", ["A.3.130", "A.5.200", "B.2.45"], ["E.2.B"])
 print(bask.calc_price())
 
