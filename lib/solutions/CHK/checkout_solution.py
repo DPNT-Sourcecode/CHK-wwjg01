@@ -25,8 +25,3 @@ def checkout(skus):
         return -1
     
     return basket.calc_price()
-
-
-
-
-

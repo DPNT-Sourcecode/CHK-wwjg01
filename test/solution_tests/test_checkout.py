@@ -10,6 +10,3 @@ class TestCheckout():
     def test_f_bogof(self):
         assert checkout_solution.checkout("FFFF") == 30
         
-
-
-

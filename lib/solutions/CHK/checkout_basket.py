@@ -98,8 +98,3 @@ class GofOffer():
         self.amt = int(split_list[1])
         self.bonus = split_list[2]
         
-
-
-
-
-
