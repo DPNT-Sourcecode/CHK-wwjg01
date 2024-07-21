@@ -27,7 +27,8 @@ class Basket():
             self.items[temp.item][1].append(temp)
         for offer in gof_offers:
             self.gof_offers.append(GofOffer(offer)) 
-
+            
+    # Calculate price for single item group, accounting for bulk offers
     def calc_bulk_price(self, item, free_amt = 0):
         this_item_total = 0
         this_item_left = self.items[item][0] - free_amt
@@ -46,7 +47,7 @@ class Basket():
     def calc_price(self):
         prices = dict.fromkeys(self.items.keys(), 0)
         
-        # Calculate prices for each item group w/ bulk offers in mind
+        # Calculate prices for each item group
         for item in self.items:
             price = self.calc_bulk_price(item)
             prices[item] = price
@@ -74,7 +75,7 @@ class BulkOffer():
     def value(self):
         return self.price / self.amt
         
-# type for '... get one free' offers. Supports getting more than one free.
+# type for '... get one free' offers. Examopke fornat - E.2.B
 class GofOffer():
     def __init__(self, offer):
         split_list = offer.split('.')
