@@ -1,4 +1,4 @@
-from lib.solutions.CHK.checkout_basket import Basket
+from solutions.CHK.checkout_basket import Basket
 
 # noinspection PyUnusedLocal
 # skus = unicode string
@@ -25,3 +25,4 @@ def checkout(skus):
         return -1
     
     return basket.calc_price()
+
