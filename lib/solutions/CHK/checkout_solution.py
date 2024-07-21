@@ -17,22 +17,13 @@ Our price table and offers:
 +------+-------+------------------------+
 '''
 
-# Implement the price table as a dict
-price_table = {
-    "A": 50,
-    "B": 30,
-    "C": 20,
-    "D": 15,
-    "E": 40
-}
-
 
 bulk_offers_list = ["A.3.130", "A.5.200", "B.2.45"]
 gof_offers_list = ["E.2.B"]
 
 def checkout(skus):
     # Build our basket from the str first
-    basket = Basket(skus, bulk_offers_list, gof_offers_list)
+    basket = Basket(skus, bulk_offers_list)
     if basket.invalid:
         return -1
     
@@ -40,3 +31,4 @@ def checkout(skus):
 
             
         
+

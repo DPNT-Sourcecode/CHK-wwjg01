@@ -13,12 +13,14 @@ class Basket():
     items = {} # "item" : [amount, [bulk offers]]
     gof_offers =[]
     def __init__(self, skus, bulk_offers=[], gof_offers=[]):
+        
         # Build our dict of items, first by determining item amounts
         for item in skus:
             if not price_table.get(item, False):
                 self.invalid = True
             else:
                 self.items[item] = [self.items.get(item, [0])[0] + 1, []]
+        
         # Then add on bulk offers
         for offer in bulk_offers:
             temp = BulkOffer(offer)
@@ -65,4 +67,5 @@ class GofOffer():
         
 bask = Basket("ABABABABCDCD", ["A.3.130", "A.5.200", "B.2.45"])
 print(bask.calc_price())
+
 
