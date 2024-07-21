@@ -36,11 +36,17 @@ def checkout(skus):
     
     # Iterate over our basket and determine final price:
     for item in basket:
-        num_of_deals = 0
-        remainder = 0
+        num_items = basket[item]
+        price = price_table[item][0]
         
         if len(price_table[item]) > 1:
-            return 
+            bulk_amt = price_table[item][1][0]
+            bulk_price = price_table[item][1][1]
+            final_price += (num_items//bulk_amt)*bulk_price + (num_items%bulk_amt)*price
+        else:
+            final_price += num_items*price
+    
+    return final_price
 
             
         
