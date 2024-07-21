@@ -3,13 +3,14 @@
 
 class Basket():
     bulk_offers_list = ["A.3.130", "A.5.200", "B.2.45"]
-    gof_offers_list = ["E.2.B"]
+    gof_offers_list = ["E.2.B", "F.2.F"]
     price_table = {
     "A": 50,
     "B": 30,
     "C": 20,
     "D": 15,
     "E": 40,
+    "F": 10,
 }
     def __init__(self, skus):
         self.invalid = False
@@ -90,5 +91,6 @@ class GofOffer():
         self.amt = int(split_list[1])
         self.bonus = split_list[2]
         
+
 
 
