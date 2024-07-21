@@ -28,6 +28,7 @@ class Basket():
     
     def calc_price(self):
         final_price = 0
+        print(self.items)
         for item in self.items:
             offers = sorted(item[1], key=BulkOffer.value)
             print(offers)
@@ -36,10 +37,10 @@ class Basket():
 # example bulk offer format - A.3.130
 class BulkOffer():
     def __init__(self, offer):
-        item, amt, price = offer.split('.')
-        self.item = item
-        self.amt = amt
-        self.price = price
+        split_list = offer.split('.')
+        self.item = split_list[0]
+        self.amt = split_list[1]
+        self.price = split_list[2]
     
     def value(self):
         return self.price/self.amt
@@ -47,7 +48,11 @@ class BulkOffer():
 # type for '... get one free' offers. Supports getting more than one free.
 class GofOffer():
     def __init__(self, offer):
-        item, amt, bonus = offer.split('.')
-        self.item = item
-        self.amt = amt
-        self.bonus = bonus
+        split_list = offer.split('.')
+        self.item = split_list[0]
+        self.amt = split_list[1]
+        self.bonus = split_list[2]
+        
+bask = Basket("ABABABABCDCD", ["A.3.130", "A.5.200", "A.30.300"])
+
+bask.calc_price()
