@@ -8,7 +8,8 @@ class TestCheckout():
     def test_invalid(self):
         assert checkout_solution.checkout("zczxv(#!__E(fdj))") == -1
     def test_f_bogof(self):
-        assert checkout_solution.checkout("FFF") == 20
+        assert checkout_solution.checkout("FFFF") == 30
         
+
 
 

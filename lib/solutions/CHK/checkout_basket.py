@@ -23,10 +23,18 @@ class Basket():
                 self.invalid = True
             else:
                 self.items[item] = [self.items.get(item, [0])[0] + 1, []]
+                
+        # Build the '.. get one free' offers list
         for offer in self.gof_offers_list:
             temp = GofOffer(offer)
+            # If a 'get one free' offer has the same letter for the offer and bonus, it's a bulk buy offer
+            if temp.item == temp.bonus:
+                self.bulk_offers_list.append(f'{temp.item}.{temp.amt+1}.{temp.amt*self.price_table[temp.item]}')
+                continue
+            
             if temp.item in self.items:
-                self.gof_offers.append(temp)     
+                self.gof_offers.append(temp)   
+                  
         # Then add on bulk offers
         for offer in self.bulk_offers_list:
             temp = BulkOffer(offer)
@@ -90,6 +98,7 @@ class GofOffer():
         self.amt = int(split_list[1])
         self.bonus = split_list[2]
         
+
 
 
 
