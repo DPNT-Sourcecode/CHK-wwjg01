@@ -19,8 +19,8 @@ Our price table and offers:
 # Implement the price table as a dict
 # key - item SKU / id, value - list where 0th index is price, following index is tuple representing bulk deal, if any
 price_table = {
-    "A": [50, (3, 130)],
-    "B": [30, (2, 45)],
+    "A": [50],
+    "B": [30],
     "C": [20],
     "D": [15]
 }
@@ -29,13 +29,20 @@ class Basket():
     total = 0 #total price of our basket
     invalid = False #whether this is an invalid basket
     items = {} # "item" : amount
-    offers = []
-    def __init__(self, skus):
+    bulk_offers = []
+    gof_offers =[]
+    def __init__(self, skus, bulk_offers=[], gof_offers=[]):
         for item in skus:
             if not price_table.get(item, False):
                 self.invalid = True
             else:
                 self.items[item] = self.items.get(item, 0) + 1
+                
+        for offer in bulk_offers:
+            self.bulk_offers.append(BulkOffer(offer))
+        for offer in gof_offers:
+            self.gof_offers.append(GofOffer(offer)) 
+        
         
 # example bulk offer format - A.3.130
 class BulkOffer():
@@ -53,6 +60,8 @@ class GofOffer():
         self.amt = amt
         self.bonus = bonus
 
+bulk_offers_list = [""]
+gof_offers_list = []
 
 def checkout(skus):
     final_price = 0
@@ -76,3 +85,4 @@ def checkout(skus):
 
             
         
+
