@@ -9,7 +9,7 @@ class Basket():
     "B": 30,
     "C": 20,
     "D": 15,
-    "E": 40
+    "E": 40,
 }
     def __init__(self, skus):
         self.invalid = False
@@ -62,7 +62,8 @@ class Basket():
         for offer in self.gof_offers:
             amt = self.items[offer.item][0]
             free_item_amt = amt//offer.amt
-            prices[offer.bonus] = min(prices[offer.item], self.calc_bulk_price(offer.bonus, free_item_amt))
+            if offer.bonus in self.items:
+                prices[offer.bonus] = min(prices[offer.item], self.calc_bulk_price(offer.bonus, free_item_amt))
                
         final_price = 0
         for price in prices:
@@ -89,4 +90,5 @@ class GofOffer():
         self.amt = int(split_list[1])
         self.bonus = split_list[2]
         
+
 
