@@ -63,6 +63,6 @@ class GofOffer():
         self.amt = split_list[1]
         self.bonus = split_list[2]
         
-bask = Basket("ABABABABCDCD", ["A.3.130", "A.5.200"])
+bask = Basket("ABABABABCDCD", ["A.3.130", "A.5.200", "B.2.45"])
 print(bask.calc_price())
 
