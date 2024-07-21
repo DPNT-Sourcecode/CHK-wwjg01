@@ -143,6 +143,3 @@ class GroupOffer():
         self.items = items
         self.amt = int(amt)
         self.price = int(price)
-
-
-

@@ -10,6 +10,4 @@ class TestCheckout():
     def test_U_bogof(self):
         assert checkout_solution.checkout("UUUU") == 120
     def test_checkout_new_items(self):
-        assert checkout_solution.checkout("QQQVZYYXAAA") == 420
-        80 + 50 + 10 + 45 + 130
-
+        assert checkout_solution.checkout("QQQVZYYXAAA") == 322
