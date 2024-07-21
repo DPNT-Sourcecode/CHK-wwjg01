@@ -29,9 +29,17 @@ class Basket():
     def calc_price(self):
         final_price = 0
         for item in self.items:
+            this_item_total = 0
+            this_item_left = self.items[item][0]
+            # sort our offers by their value, so that we can ensure customer gets best deal
             offers = sorted(self.items[item][1], key=BulkOffer.value)
             for offer in offers:
-                print(offer.amt)
+                if offer.amt > this_item_left:
+                    continue
+                this_item_total += (this_item_left//offer.amt)*offer.price
+                this_item_left = this_item_left%offer.amt
+                
+                
         return 0
         
 # example bulk offer format - A.3.130
@@ -56,3 +64,4 @@ class GofOffer():
 bask = Basket("ABABABABCDCD", ["A.3.130", "A.5.200", "A.30.300"])
 
 bask.calc_price()
+
