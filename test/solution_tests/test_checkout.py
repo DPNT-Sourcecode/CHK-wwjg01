@@ -12,5 +12,3 @@ class TestCheckout():
     def test_checkout_new_items(self):
         assert checkout_solution.checkout("QQQVZYYXAAA") == 420
         
-
-
