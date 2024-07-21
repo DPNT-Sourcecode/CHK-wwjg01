@@ -38,9 +38,11 @@ class Basket():
                     continue
                 this_item_total += (this_item_left//offer.amt)*offer.price
                 this_item_left = this_item_left%offer.amt
+            this_item_total += this_item_left*price_table[item]
+            final_price += this_item_total
                 
                 
-        return 0
+        return final_price
         
 # example bulk offer format - A.3.130
 class BulkOffer():
@@ -61,7 +63,6 @@ class GofOffer():
         self.amt = split_list[1]
         self.bonus = split_list[2]
         
-bask = Basket("ABABABABCDCD", ["A.3.130", "A.5.200", "A.30.300"])
-
-bask.calc_price()
+bask = Basket("ABABABABCDCD", ["A.3.130", "A.5.200"])
+print(bask.calc_price())
 
